@@ -22,7 +22,7 @@ The soundtrack is synthesized in the same script and is synchronized to the visu
 
 ## Output format
 
-- HEVC Main 10, `yuv420p10le`, 30 fps, `hvc1` tag, MP4 with faststart
+- HEVC Main 10, `yuv420p10le`, 30 fps, about 10 Mb/s, `hvc1` tag, MP4 with faststart
 - BT.2020 primaries, PQ transfer, BT.2020 non-constant-luminance matrix, limited range
 - Mastering display: P3-D65 primaries, 0.005–4,000 nits
 - MaxCLL / MaxFALL are measured from the rendered frames (currently 4000 / 116)
@@ -51,5 +51,5 @@ To send them somewhere else, set `HDR_SCRATCH=/some/dir`.
 ## Notes
 
 - The preview PNGs use a log curve so that the whole range fits on an SDR screen. They do **not** show what the video looks like on an HDR display.
-- The encode uses `-crf 14`, which averages about 4 Mb/s. YouTube recommends about 10 Mb/s for 1080p HDR uploads, so lower the CRF if you want more headroom for the dark gradients.
+- The encode targets 12 Mb/s (`-b:v 12M -maxrate 20M -bufsize 24M`) and comes out at about 10 Mb/s, in line with YouTube's recommendation for 1080p HDR uploads. An earlier constant-quality encode at CRF 14 came out at only 3.9 Mb/s because so much of each frame is smooth or near-black.
 - YouTube can take a while after an upload finishes before it offers the HDR version.
