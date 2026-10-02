@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+hdr_stats.json
+hdr_audio.wav
+preview_*.png
